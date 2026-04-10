@@ -70,7 +70,8 @@ const Dashboard = () => {
 
   // Socket.io for Real-time Update
   useEffect(() => {
-    const socket = io('http://localhost:5000');
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+    const socket = io(backendUrl);
 
     socket.on('taskCreated', (task) => {
       // Check if it matches current filters before prepending

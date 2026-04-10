@@ -1,8 +1,9 @@
 import axios from 'axios';
 
 // Create an Axios instance
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api', // adjust matching the backend port
+  baseURL: `${BACKEND_URL}/api`, // adjust matching the backend port
 });
 
 // Add a request interceptor to add the token
@@ -30,7 +31,7 @@ api.interceptors.response.use(
 
       if (refreshToken) {
         try {
-          const res = await axios.post('http://localhost:5000/api/auth/refresh', { token: refreshToken });
+          const res = await axios.post(`${BACKEND_URL}/api/auth/refresh`, { token: refreshToken });
           
           if (res.status === 200) {
             localStorage.setItem('accessToken', res.data.accessToken);
