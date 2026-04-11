@@ -178,7 +178,7 @@ export const summarizeTask = async (req, res) => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const prompt = `Please provide a concise and clear summary of the following task description:\n\n${task.description}`;
     
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const summary = response.text();
